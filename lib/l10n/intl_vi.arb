@@ -1,0 +1,18 @@
+{
+  "home": "Trang chủ",
+  "profile": "Cá nhân",
+  "store": "Cửa hàng",
+  "login": "Đăng nhập",
+  "next": "Tiếp theo",
+  "welcome": "Chào mừng đến với Fresh Fruits",
+  "appName": "Ứng dụng tạp hoá",
+  "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  "description2": "Chúng tôi cung cấp Trái cây chất lượng tốt nhất cho gia đình bạn",
+  "description3": "Giao hàng nhanh chóng và có trách nhiệm bằng nhân viên của chúng tôi",
+  "createAnAccount": "Tạo tài khoản",
+  "singIn": "Đăng nhập",
+  "forgotPassword": "Quên mật khẩu?",
+  "createYourAccount": "Tạo tài khoản",
+  "nonEmail": "Email không được để trống",
+  "badEmail": "Email không hợp lệ"
+}

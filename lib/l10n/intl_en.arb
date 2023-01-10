@@ -1,0 +1,18 @@
+{
+  "home": "Home",
+  "profile": "Profile",
+  "store": "Store",
+  "login": "Login",
+  "next": "Next",
+  "welcome": "Welcome to Fresh Fruits",
+  "appName": "Grocery application",
+  "lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  "description2": "We provide best quality Fruits to your family",
+  "description3": "Fast and responsibily delivery by our courir",
+  "createAnAccount": "Create an account",
+  "singIn": "Sign In",
+  "forgotPassword": "Forgot Password?",
+  "createYourAccount": "Create your account",
+  "nonEmail": "Email is empty",
+  "badEmail": "Email is invalid"
+}
