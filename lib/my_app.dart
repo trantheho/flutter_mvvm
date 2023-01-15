@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,7 +10,6 @@ import 'package:path_provider/path_provider.dart';
 import 'core/app_config.dart';
 import 'core/app_controller.dart';
 import 'core/manager/locale_manager.dart';
-import 'core/router/app_router.dart';
 import 'generated/l10n.dart';
 import 'presentation/pages/error/error_page.dart';
 import 'presentation/widgets/loading.dart';
@@ -20,7 +20,7 @@ Future<void> initMyApp() async {
   AppConfig.build(Environment.dev);
   await initLocalDatabase();
   runApp(
-    AppStateScope(
+    AppStateManager(
       child: const ProviderScope(
         child: MyApp(),
       ),
@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = AppStateScope.of(context);
+    final appState = AppStateManager.of(context);
 
     return Consumer(
       builder: (_, ref, __) {

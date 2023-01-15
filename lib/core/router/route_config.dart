@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
 import 'package:flutter_mvvm/domain/models/product_model.dart';
 import 'package:flutter_mvvm/presentation/pages/authenticate/auth_action_page/auth_action_page.dart';
 import 'package:flutter_mvvm/presentation/pages/categories/categories_page.dart';
@@ -206,8 +207,8 @@ class RouteConfig {
   }
 
   static String? guard(BuildContext context, GoRouterState state) {
-    final bool loggedIn = AppStateScope.of(context).currentUser != null;
-    final bool firstLogin = AppStateScope.of(context).firstLogin;
+    final bool loggedIn = AppStateManager.of(context).currentUser != null;
+    final bool firstLogin = AppStateManager.of(context).firstLogin;
     final authLocation = state.subloc == AppPage.auth.path;
     final authActionLocation = state.subloc == AppPage.authAction.mapValueToParams('');
     final loginAction = state.subloc == AppPage.authAction.mapValueToParams('login');

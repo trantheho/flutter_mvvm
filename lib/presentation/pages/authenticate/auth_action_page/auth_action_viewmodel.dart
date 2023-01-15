@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/core/app_controller.dart';
-import 'package:flutter_mvvm/core/router/app_router.dart';
+import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
 import 'package:flutter_mvvm/data/datasources/local/hive_storage.dart';
 import 'package:flutter_mvvm/domain/models/account_model.dart';
 import 'package:flutter_mvvm/domain/usecases/create_an_account_usecase.dart';
@@ -48,7 +48,7 @@ class AuthActionViewModel extends StateNotifier<AuthActionState>{
   }
 
   Future<void> login({required String email, required String password, required BuildContext context}) async {
-    final appState = AppStateScope.of(context);
+    final appState = AppStateManager.of(context);
     try{
       appController.loading.show();
       final user = await loginUseCase.run(email: email, password: password);

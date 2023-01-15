@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm/core/app_controller.dart';
-import 'package:flutter_mvvm/core/router/app_router.dart';
+import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
 import 'package:flutter_mvvm/core/router/route_config.dart';
 import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
@@ -42,7 +41,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = AppStateScope.of(context);
+    final appState = AppStateManager.of(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
