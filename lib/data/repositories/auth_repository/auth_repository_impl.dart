@@ -1,4 +1,4 @@
-import 'package:flutter_mvvm/data/repositories/auth_repository/auth_repository.dart';
+import 'package:flutter_mvvm/domain/repository/auth_repository/auth_repository.dart';
 import 'package:flutter_mvvm/domain/models/account_model.dart';
 import 'package:flutter_mvvm/domain/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
