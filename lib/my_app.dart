@@ -3,13 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
+import 'package:flutter_mvvm/core/manager/theme_manager.dart';
+import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'core/app_config.dart';
 import 'core/app_controller.dart';
-import 'core/manager/locale_manager.dart';
+import 'data/datasources/local/hive_storage.dart';
 import 'generated/l10n.dart';
 import 'presentation/pages/error/error_page.dart';
 import 'presentation/widgets/loading.dart';
@@ -20,9 +22,10 @@ Future<void> initMyApp() async {
   AppConfig.build(Environment.dev);
   await initLocalDatabase();
   runApp(
-    AppStateManager(
-      child: const ProviderScope(
-        child: MyApp(),
+    ProviderScope(
+      child: AppStateManager(
+        localDataSource: HiveStorage.instance,
+        child: const MyApp(),
       ),
     ),
   );
@@ -45,45 +48,40 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     appController.loading.dispose();
-
+    context.appState.dispose();
     super.dispose();
   }
 
 
   @override
   Widget build(BuildContext context) {
-    final appState = AppStateManager.of(context);
+    return MaterialApp.router(
+      title: 'Flutter Demo',
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: context.appState.locale,
+      supportedLocales: S.delegate.supportedLocales,
+      routerConfig: appController.router.goRouter,
+      themeMode: context.appState.themeMode,
+      theme: ThemeManager.light,
+      darkTheme: ThemeManager.dark,
+      builder: (builderContext, child) {
+        ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+          return ErrorPage(
+            error: errorDetails.summary.toString(),
+          );
+        };
 
-    return Consumer(
-      builder: (_, ref, __) {
-        final locale = ref.watch(localeProvider);
-
-        return MaterialApp.router(
-          title: 'Flutter Demo',
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
+        return Stack(
+          children: [
+            child!,
+            if (!builderContext.appState.initialized) const InitializeApp(),
+            const LoadingListenable(),
           ],
-          locale: locale,
-          supportedLocales: S.delegate.supportedLocales,
-          routerConfig: appController.router.goRouter,
-          builder: (context, child) {
-            ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
-              return ErrorPage(
-                error: errorDetails.summary.toString(),
-              );
-            };
-
-            return Stack(
-              children: [
-                child!,
-                if (!appState.initialized) const InitializeApp(),
-                const LoadingListenable(),
-              ],
-            );
-          },
         );
       },
     );

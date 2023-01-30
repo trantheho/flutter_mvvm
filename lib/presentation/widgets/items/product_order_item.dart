@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/core/utils/app_assets.dart';
 import 'package:flutter_mvvm/domain/models/shopping_cart_model.dart';
-import 'package:flutter_mvvm/presentation/providers/shipping_cart_provider.dart';
+import 'package:flutter_mvvm/presentation/providers/shopping_cart_provider.dart';
 import 'package:flutter_mvvm/presentation/widgets/quantity_count.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';

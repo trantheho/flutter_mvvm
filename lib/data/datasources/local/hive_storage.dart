@@ -1,5 +1,5 @@
 import 'dart:ui' as ui;
-
+import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/data/datasources/local/local_data_source.dart';
 import 'package:hive/hive.dart';
 
@@ -52,5 +52,22 @@ class HiveStorage implements LocalDataSource{
   Future<void> updateFirstLogin(bool value) async {
     final box = await Hive.openBox<bool>('firstLogin');
     await box.put('firstLogin', value);
+  }
+
+  @override
+  Future<ThemeMode> getTheme() async {
+    final box = await Hive.openBox<String>('theme');
+    final mode = box.get('theme');
+
+    if(mode == null) return ThemeMode.light;
+    if(mode == 'dark') return ThemeMode.dark;
+
+    return ThemeMode.light;
+  }
+
+  @override
+  Future<void> updateTheme(String mode) async {
+    final box = await Hive.openBox<String>('theme');
+    await box.put('theme', mode);
   }
 }

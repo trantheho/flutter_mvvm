@@ -5,7 +5,7 @@ import 'package:flutter_mvvm/core/utils/app_helper.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
 import 'package:flutter_mvvm/domain/models/product_model.dart';
 import 'package:flutter_mvvm/presentation/providers/product_provider.dart';
-import 'package:flutter_mvvm/presentation/providers/shipping_cart_provider.dart';
+import 'package:flutter_mvvm/presentation/providers/shopping_cart_provider.dart';
 import 'package:flutter_mvvm/presentation/widgets/app_bar.dart';
 import 'package:flutter_mvvm/presentation/widgets/rating_overview.dart';
 import 'package:flutter_mvvm/presentation/widgets/tab_bar_view/description_tab.dart';

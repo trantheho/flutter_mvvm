@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
-import 'package:flutter_mvvm/presentation/providers/shipping_cart_provider.dart';
+import 'package:flutter_mvvm/presentation/providers/shopping_cart_provider.dart';
 import 'package:flutter_mvvm/presentation/widgets/items/product_order_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +28,7 @@ class _ShoppingCardPageState extends State<ShoppingCardPage> {
             _buildAppBar(),
             Expanded(
               child: Consumer(
-                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                builder: (_,ref,__) {
                   final cart = ref.watch(shoppingCartProvider);
 
                   return cart.isEmpty
@@ -75,14 +75,13 @@ class _ShoppingCardPageState extends State<ShoppingCardPage> {
             builder: (_,ref,__) {
               final shoppingCart = ref.watch(shoppingCartProvider);
 
-
               return TextButton(
                 onPressed: (){
                   if(shoppingCart.isEmpty){
                     appController.dialog.showDefaultDialog(
                       context: context,
                       title: "No order",
-                      message: "Your shopping cart is no product",
+                      message: "Please add more product",
                     );
                   }
                   else{

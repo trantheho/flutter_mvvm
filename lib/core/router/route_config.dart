@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
+import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_mvvm/domain/models/product_model.dart';
 import 'package:flutter_mvvm/presentation/pages/authenticate/auth_action_page/auth_action_page.dart';
 import 'package:flutter_mvvm/presentation/pages/categories/categories_page.dart';
 import 'package:flutter_mvvm/presentation/pages/deal/deal_page.dart';
 import 'package:flutter_mvvm/presentation/pages/deal/detail/item_detail_page.dart';
 import 'package:flutter_mvvm/presentation/pages/home/home_page.dart';
-import 'package:flutter_mvvm/presentation/pages/main_page/main_page.dart';
 import 'package:flutter_mvvm/presentation/pages/profile/profile_page.dart';
 import 'package:flutter_mvvm/presentation/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:flutter_mvvm/presentation/pages/store/store_page.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../presentation/pages/authenticate/auth_page/auth_page.dart';
 import '../../presentation/pages/checkout/checkout_page.dart';
 import '../../presentation/pages/onboarding/onboarding_page.dart';
-import 'app_router.dart';
 import 'page_transitions.dart';
 
 enum AppPage {
@@ -30,7 +29,7 @@ enum AppPage {
   profile(path: '/profile'),
   category(path: '/category'),
   cart(path: '/cart'),
-  checkout(path:'checkout', fullPath: '/cart/checkout'),
+  checkout(path: 'checkout', fullPath: '/cart/checkout'),
   favorite(path: '/favorite'),
   deal(path: ':type', fullPath: '/category/:type', params: 'type'),
   detail(path: ':product', params: 'product');
@@ -112,17 +111,18 @@ extension AppPageRoute on AppPage {
         );
       case AppPage.deal:
         return GoRoute(
-          path: path,
-          name: name,
-          parentNavigatorKey: RouteConfig.rootKey,
-          pageBuilder: (context, state) => PageTransition.fadeThrough(
-            key: state.pageKey,
-            child: DealPage(title: (state.params[params] ?? ''),),
-          ),
-          routes: [
-            AppPage.detail.route(),
-          ]
-        );
+            path: path,
+            name: name,
+            parentNavigatorKey: RouteConfig.rootKey,
+            pageBuilder: (context, state) => PageTransition.fadeThrough(
+                  key: state.pageKey,
+                  child: DealPage(
+                    title: (state.params[params] ?? ''),
+                  ),
+                ),
+            routes: [
+              AppPage.detail.route(),
+            ]);
       case AppPage.category:
         return GoRoute(
           path: path,
@@ -137,16 +137,15 @@ extension AppPageRoute on AppPage {
         );
       case AppPage.cart:
         return GoRoute(
-          path: path,
-          name: name,
-          pageBuilder: (context, state) => PageTransition.fadeThrough(
-            key: state.pageKey,
-            child: const ShoppingCardPage(),
-          ),
-          routes: [
-            AppPage.checkout.route(),
-          ]
-        );
+            path: path,
+            name: name,
+            pageBuilder: (context, state) => PageTransition.fadeThrough(
+                  key: state.pageKey,
+                  child: const ShoppingCardPage(),
+                ),
+            routes: [
+              AppPage.checkout.route(),
+            ]);
       case AppPage.favorite:
         return GoRoute(
           path: path,
@@ -175,7 +174,7 @@ extension AppPageRoute on AppPage {
           path: path,
           name: name,
           parentNavigatorKey: RouteConfig.rootKey,
-          pageBuilder: (_, state){
+          pageBuilder: (_, state) {
             return PageTransition.fadeThrough(
               key: state.pageKey,
               child: const CheckoutPage(),
@@ -202,13 +201,9 @@ class RouteConfig {
 
   static GoRoute buildRoute(AppPage page) => page.route();
 
-  static Widget initPage(BuildContext context, GoRouterState state, Widget child) {
-    return MainPage(child: child);
-  }
-
   static String? guard(BuildContext context, GoRouterState state) {
-    final bool loggedIn = AppStateManager.of(context).currentUser != null;
-    final bool firstLogin = AppStateManager.of(context).firstLogin;
+    final bool loggedIn = context.appState.currentUser != null;
+    final bool firstLogin = context.appState.firstLogin;
     final authLocation = state.subloc == AppPage.auth.path;
     final authActionLocation = state.subloc == AppPage.authAction.mapValueToParams('');
     final loginAction = state.subloc == AppPage.authAction.mapValueToParams('login');

@@ -1,113 +1,113 @@
 import 'dart:async';
+import 'dart:ui' as ui;
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-import '../../data/datasources/local/hive_storage.dart';
 import '../../data/datasources/local/local_data_source.dart';
 import '../../domain/models/user_model.dart';
 
-class AppStateManager extends InheritedNotifier<AppStateNotifier>{
+class AppStateManager extends InheritedNotifier<AppState> {
   AppStateManager({
     Key? key,
     required Widget child,
+    required LocalDataSource localDataSource,
   }) : super(
-    key: key,
-    notifier: AppStateNotifier(),
-    child: child,
-  );
+          key: key,
+          notifier: AppState(localDataSource),
+          child: child,
+        );
 
   static AppState of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<AppStateManager>()!.notifier!.appState;
-  }
-}
-
-class AppStateNotifier extends ChangeNotifier {
-  final AppState appState;
-
-  AppStateNotifier() : appState = AppState(HiveStorage.instance) {
-    appState.initAppState();
-    appState.onInitializedStateChange.listen((_) => notifyListeners());
-    appState.onCurrentUserChanged.listen((_) => notifyListeners());
-    appState.onFirstLoginChange.listen((_) => notifyListeners());
+    return context.dependOnInheritedWidgetOfExactType<AppStateManager>()!.notifier!;
   }
 
   @override
-  void dispose() {
-    appState.dispose();
-    super.dispose();
+  bool updateShouldNotify(covariant InheritedNotifier<AppState> oldWidget) {
+    return super.updateShouldNotify(oldWidget);
   }
 }
 
-class AppState {
+class AppState extends ChangeNotifier {
   final LocalDataSource localDataSource;
 
-  AppState(this.localDataSource)
-      : _initializedStateController = StreamController<bool>.broadcast(),
-        _userStreamController = StreamController<UserModel?>.broadcast(),
-        _firstLoginController = StreamController<bool>.broadcast()
-  {
-    _initializedStateController.stream.distinct().listen((state) {
-      debugPrint('state change');
-      _initialized = state;
-    });
-    _userStreamController.stream.distinct().listen((UserModel? currentUser) {
-      debugPrint('user change');
-      _currentUser = currentUser;
-    });
-    _firstLoginController.stream.distinct().listen((bool value) {
-      debugPrint('first login change');
-      _firstLogin = value;
-    });
+  AppState(this.localDataSource) {
+    initAppState();
   }
-
-  final StreamController<bool> _initializedStateController;
-  final StreamController<bool> _firstLoginController;
-  final StreamController<UserModel?> _userStreamController;
-
-  Stream<bool> get onInitializedStateChange => _initializedStateController.stream;
-  Stream<bool> get onFirstLoginChange => _firstLoginController.stream;
-  Stream<UserModel?> get onCurrentUserChanged => _userStreamController.stream;
 
   bool _initialized = false;
   bool _firstLogin = true;
-  UserModel? _currentUser;
+  UserModel? _userInfo;
+  ThemeMode _theme = ThemeMode.light;
+  Locale _locale = Locale(ui.window.locale.languageCode);
 
   bool get initialized => _initialized;
-  bool get firstLogin => _firstLogin;
-  UserModel? get currentUser => _currentUser;
 
+  bool get firstLogin => _firstLogin;
+
+  UserModel? get currentUser => _userInfo;
+
+  ThemeMode get themeMode => _theme;
+
+  Locale get locale => _locale;
 
   Future<void> initAppState() async {
-    final value = await localDataSource.getFirstLogin();
-    _firstLoginController.add(value);
+    final firstLoginValue = await localDataSource.getFirstLogin();
+    final oldTheme = await localDataSource.getTheme();
+    final currentLanguageCode = await localDataSource.getLocale();
+
+    if (_firstLogin != firstLoginValue) {
+      _firstLogin = firstLoginValue;
+      notifyListeners();
+    }
+    if (_theme != oldTheme) _theme = oldTheme;
+    if (_locale.languageCode != currentLanguageCode) _locale = Locale(currentLanguageCode);
+
     await checkLogin();
     if (!initialized) {
-      _initializedStateController.add(true);
+      _initialized = true;
+      notifyListeners();
     }
   }
 
   Future<void> checkLogin() async {
     await Future<void>.delayed(const Duration(seconds: 2));
-    _userStreamController.add(null);
+    _userInfo = null;
   }
 
   Future<void> updateFirstLogin() async {
-    _firstLoginController.add(false);
+    _firstLogin = false;
+    notifyListeners();
     await localDataSource.updateFirstLogin(false);
   }
 
   Future<void> signIn(UserModel newUser) async {
-    _userStreamController.add(newUser);
+    _userInfo = newUser;
+    notifyListeners();
   }
 
   Future<void> signOut() async {
-    _userStreamController.add(null);
+    _userInfo = null;
+    notifyListeners();
   }
 
-  void dispose(){
-    _initializedStateController.close();
-    _firstLoginController.close();
-    _userStreamController.close();
+  void updateTheme(ThemeMode themeMode) {
+    if (_theme != themeMode) {
+      debugPrint('change theme $themeMode');
+      _theme = themeMode;
+      notifyListeners();
+      localDataSource.updateTheme(themeMode.name);
+    }
+  }
+
+  void updateLocale(Locale newLocale) {
+    if (newLocale.languageCode != _locale.languageCode) {
+      try {
+        _locale = newLocale;
+        notifyListeners();
+        localDataSource.saveLocale(newLocale.languageCode);
+      } catch (error) {
+        throw StateError("update locale failed ${error.toString()}");
+      }
+    }
   }
 }
-

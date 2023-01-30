@@ -1,25 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/core/utils/styles.dart';
+import 'package:flutter_mvvm/data/datasources/local/local_data_source.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ThemeManager extends Notifier<ThemeData>{
-  final ThemeData localTheme;
+import '../../data/datasources/local/hive_storage.dart';
 
-  ThemeManager(this.localTheme);
+class ThemeManager{
 
-
-  final ThemeData light = ThemeData(
-
+  static final ThemeData light = ThemeData(
+    primaryColor: AppColors.orange,
   );
 
 
-  final dark = ThemeData(
-
+  static final dark = ThemeData(
+    primaryColor: Colors.black,
   );
-
-  ThemeData get currentTheme => state;
-
-  @override
-  ThemeData build() {
-    return localTheme;
-  }
 }
+
+/*
+final themeInit = FutureProvider<ThemeMode>((ref) async => await HiveStorage.instance.getTheme());
+
+final themeProvider = StateNotifierProvider<ThemeProvider, ThemeMode>((ref){
+
+  //final theme = ref.watch(themeInit).value!;
+
+  return ThemeProvider(ThemeMode.light, HiveStorage.instance);
+});
+
+
+class ThemeProvider extends StateNotifier<ThemeMode>{
+  final ThemeMode initThemeMode;
+  final LocalDataSource localDataSource;
+
+  ThemeProvider(this.initThemeMode, this.localDataSource)  : super(initThemeMode);
+
+
+  Future<void> updateTheme(ThemeMode themeMode) async {
+    try{
+      await localDataSource.updateTheme(themeMode.name);
+      state = themeMode;
+    }
+    catch (e){
+      throw StateError("update theme failed with ${e.toString()}");
+    }
+  }
+}*/

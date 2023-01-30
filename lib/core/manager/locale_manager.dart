@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/data/datasources/local/local_data_source.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:ui' as ui;
 
@@ -15,7 +16,7 @@ final localeProvider = StateNotifierProvider<LocaleManager, Locale>((ref){
 });
 
 class LocaleManager extends StateNotifier<Locale> {
-  HiveStorage localDataSource;
+  LocalDataSource localDataSource;
   final Locale initLocale;
 
   LocaleManager(this.localDataSource, this.initLocale) : super(initLocale);

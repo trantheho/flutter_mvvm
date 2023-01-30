@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 abstract class LocalDataSource{
 
   Future<String> getAccessToken();
@@ -13,4 +15,8 @@ abstract class LocalDataSource{
   Future<bool> getFirstLogin();
 
   Future<void> updateFirstLogin(bool value);
+
+  Future<ThemeMode> getTheme();
+
+  Future<void> updateTheme(String mode);
 }

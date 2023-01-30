@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../presentation/pages/error/error_page.dart';
+import '../../presentation/pages/main_page/main_page.dart';
 import 'route_config.dart';
 
 class AppRouter{
@@ -21,7 +22,7 @@ class AppRouter{
             RouteConfig.buildRoute(AppPage.onBoarding),
             RouteConfig.buildRoute(AppPage.auth),
             ShellRoute(
-              builder: (_, state, child) => RouteConfig.initPage(_, state, child),
+              builder: (_, state, child) => MainPage(child: child),
               navigatorKey: RouteConfig.nestedKey,
               routes: [
                 RouteConfig.buildRoute(AppPage.root),

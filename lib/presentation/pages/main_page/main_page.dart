@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm/core/utils/app_assets.dart';
+import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,7 +25,6 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -34,7 +33,7 @@ class _MainPageState extends State<MainPage> {
         body: widget.child,
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: AppColors.orange,
+          selectedItemColor: context.theme.primaryColor,
           unselectedItemColor: AppColors.grey177,
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -109,7 +108,7 @@ class _MainPageState extends State<MainPage> {
 
     return BottomNavigationBarItem(
       icon: Image.asset(icon, color: AppColors.grey177,),
-      activeIcon: Image.asset(icon, color: AppColors.orange,),
+      activeIcon: Image.asset(icon, color: context.theme.primaryColor,),
       label: '',
     );
   }

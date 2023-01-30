@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mvvm/core/app_controller.dart';
-import 'package:flutter_mvvm/presentation/providers/shipping_cart_provider.dart';
+import 'package:flutter_mvvm/presentation/providers/shopping_cart_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/usecases/checkout_order_usecase.dart';

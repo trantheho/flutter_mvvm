@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
 import 'package:intl/intl.dart';
 
 
 extension BuildContextExtension on BuildContext{
-  ThemeData get theme {
-    return Theme.of(this);
-  }
+  ThemeData get theme => Theme.of(this);
+
+  AppState get appState => AppStateManager.of(this);
 }
 
 extension StringExtension on String {
