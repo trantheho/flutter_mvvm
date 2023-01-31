@@ -214,16 +214,14 @@ class RouteConfig {
     }
 
     if (!loggedIn) {
-      if (authLocation) {
+      if (authLocation) return null;
+
+      if (!authLocation && authActionLocation) return AppPage.auth.path;
+
+      if (!authLocation && !authActionLocation && loginAction || registerAction) {
         return null;
-      } else if (authActionLocation) {
-        return AppPage.auth.path;
       } else {
-        if (loginAction || registerAction) {
-          return null;
-        } else {
-          return AppPage.auth.path;
-        }
+        return AppPage.auth.path;
       }
     }
 

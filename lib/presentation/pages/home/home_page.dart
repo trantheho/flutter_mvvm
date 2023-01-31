@@ -41,46 +41,6 @@ class _HomePageState extends State<HomePage> {
     CategoryModel(imageUrl: AppImages.icEgg,),
   ];
 
-  final products = [
-    ProductModel(
-      id: 1,
-      imageUrl: AppImages.avocado,
-      name: "Avocado",
-      price: 6.7,
-      priceString: r"$6.7",
-      favorite: true,
-      productType: 'fruits',
-    ),
-    ProductModel(
-      id: 2,
-      imageUrl: AppImages.brocoli,
-      name: "Brocoli",
-      price: 8.7,
-      priceString: "\$8.7",
-      favorite: false,
-      productType: 'fruits',
-    ),
-    ProductModel(
-      id: 3,
-      imageUrl: AppImages.tomatoes,
-      name: "Tomatoes",
-      price: 4.9,
-      priceString: r"$4.9",
-      favorite: false,
-      productType: 'fruits',
-    ),
-    ProductModel(
-      id: 4,
-      imageUrl: AppImages.grapes,
-      name: "Grapes",
-      price: 7.2,
-      priceString: r"$7.2",
-      favorite: false,
-      productType: 'fruits',
-    ),
-  ];
-
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -97,7 +57,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 30,),
               Categories(categories: categories),
               const SizedBox(height: 26,),
-              Expanded(child: Trending(products: products,),),
+              const Expanded(child: Trending(),),
             ],
           ),
         ),
@@ -235,8 +195,7 @@ class UserInfo extends StatelessWidget {
 }
 
 class Trending extends StatelessWidget {
-  final List<ProductModel> products;
-  const Trending({Key? key, required this.products,}) : super(key: key);
+  const Trending({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
