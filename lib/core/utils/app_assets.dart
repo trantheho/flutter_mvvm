@@ -31,6 +31,9 @@ class AppImages {
   static const icSetting = '$iconsPath/setting.png';
   static const icStatistic = '$iconsPath/statistic.png';
   static const icLogout = '$iconsPath/logout.png';
+  static const icVietnamese = '$iconsPath/vietnam.png';
+  static const icEnglish = '$iconsPath/english.png';
+  static const icLanguage = '$iconsPath/language.png';
 
 
   /// image

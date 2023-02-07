@@ -14,5 +14,11 @@
   "forgotPassword": "Quên mật khẩu?",
   "createYourAccount": "Tạo tài khoản",
   "nonEmail": "Email không được để trống",
-  "badEmail": "Email không hợp lệ"
+  "badEmail": "Email không hợp lệ",
+  "vietnamese": "Tiếng Việt",
+  "english": "Tiếng Anh",
+  "language": "Ngôn ngữ",
+  "setting": "Cài đặt",
+  "statistic": "Thống kê",
+  "logout": "Đăng xuất"
 }

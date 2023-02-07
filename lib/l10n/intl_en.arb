@@ -14,5 +14,11 @@
   "forgotPassword": "Forgot Password?",
   "createYourAccount": "Create your account",
   "nonEmail": "Email is empty",
-  "badEmail": "Email is invalid"
+  "badEmail": "Email is invalid",
+  "vietnamese": "Vietnamese",
+  "english": "English",
+  "language": "Languages",
+  "setting": "Setting",
+  "statistic": "Statistic",
+  "logout": "Logout"
 }

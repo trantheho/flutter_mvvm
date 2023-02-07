@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
-import 'package:flutter_mvvm/core/manager/locale_manager.dart';
-import 'package:flutter_mvvm/core/manager/theme_manager.dart';
-import 'package:flutter_mvvm/core/router/app_router.dart';
+import 'package:flutter_mvvm/core/utils/app_enum.dart';
 import 'package:flutter_mvvm/core/utils/app_utils.dart';
-import 'package:flutter_mvvm/core/utils/styles.dart';
-import 'package:flutter_mvvm/domain/models/user_model.dart';
 import 'package:flutter_mvvm/generated/l10n.dart';
 import 'package:flutter_mvvm/presentation/widgets/app_bar.dart';
-import 'package:flutter_mvvm/presentation/widgets/button.dart';
 import 'package:flutter_mvvm/presentation/widgets/items/profile_menu_item.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -56,7 +50,24 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const SizedBox(
-              height: 20.0,
+              height: 14.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 28.0,
+                right: 28.0,
+              ),
+              child: ProfileMenuItem.locale(
+                iconAsset: AppImages.icLanguage,
+                text: S.of(context).language,
+                languages: AppLanguage.values,
+                onLanguageChanged: (languageContext, language){
+                  languageContext.appState.updateLocale(Locale(language.code));
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 14.0,
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -65,12 +76,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: ProfileMenuItem(
                 iconAsset: AppImages.icSetting,
-                text: 'Setting',
+                text: S.of(context).setting,
                 onTap: () {},
               ),
             ),
             const SizedBox(
-              height: 20.0,
+              height: 14.0,
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -79,12 +90,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: ProfileMenuItem(
                 iconAsset: AppImages.icStatistic,
-                text: 'Statistic',
+                text: S.of(context).statistic,
                 onTap: () {},
               ),
             ),
             const SizedBox(
-              height: 20.0,
+              height: 14.0,
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -93,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: ProfileMenuItem(
                 iconAsset: AppImages.icLogout,
-                text: 'Logout',
+                text: S.of(context).logout,
                 onTap: () {},
               ),
             ),

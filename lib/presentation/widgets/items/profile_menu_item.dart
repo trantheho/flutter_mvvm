@@ -1,29 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/core/utils/app_enum.dart';
 import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
+import 'package:flutter_mvvm/generated/l10n.dart';
 
 class ProfileMenuItem extends StatelessWidget {
   final String iconAsset;
   final String text;
   final bool switchMode;
+  final bool dropDown;
   final Function()? onTap;
   final Function(BuildContext, bool)? onSwitchChanged;
+  final Function(BuildContext, AppLanguage)? onLanguageChanged;
+  final List<AppLanguage> languages;
 
-  const ProfileMenuItem({
+  ProfileMenuItem({
     super.key,
     required this.iconAsset,
     required this.text,
     this.onTap,
   })  : onSwitchChanged = null,
-        switchMode = false;
+        onLanguageChanged = null,
+        switchMode = false,
+        dropDown = false,
+        languages = [];
 
-  const ProfileMenuItem.switchMode({
+  ProfileMenuItem.switchMode({
     super.key,
     required this.iconAsset,
     required this.text,
     this.onSwitchChanged,
   })  : onTap = null,
-        switchMode = true;
+        onLanguageChanged = null,
+        switchMode = true,
+        dropDown = false,
+        languages = [];
+
+  const ProfileMenuItem.locale({
+    super.key,
+    required this.iconAsset,
+    required this.text,
+    required this.languages,
+    this.onLanguageChanged,
+  })  : onTap = null,
+        switchMode = false,
+        dropDown = true,
+        onSwitchChanged = null;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +78,8 @@ class ProfileMenuItem extends StatelessWidget {
               ),
             ),
             if (switchMode) _buildSwitchButton(context, darkMode),
-            if (!switchMode)
+            if (dropDown) _buildDropDown(context, theme),
+            if (!switchMode && !dropDown)
               Padding(
                 padding: const EdgeInsets.only(
                   right: 8.0,
@@ -69,6 +92,50 @@ class ProfileMenuItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildDropDown(BuildContext context, ThemeData theme) {
+    final value = languages.firstWhere(
+      (e) => e.code == context.appState.locale.languageCode,
+      orElse: () => AppLanguage.vietnamese,
+    );
+
+    return DropdownButton<AppLanguage>(
+      value: value,
+      icon: Icon(Icons.arrow_drop_down_outlined, color: theme.iconTheme.color,),
+      elevation: 16,
+      style: AppTextStyle.medium.copyWith(color: theme.primaryColorLight,),
+      onChanged: (language) => onLanguageChanged != null ? onLanguageChanged!(context, language!) : null,
+      items: languages.map((e) {
+        String asset = '';
+        String text = '';
+        switch (e) {
+          case AppLanguage.vietnamese:
+            asset = AppImages.icVietnamese;
+            text = S.of(context).vietnamese;
+            break;
+          case AppLanguage.english:
+            asset = AppImages.icEnglish;
+            text = S.of(context).english;
+            break;
+        }
+
+        return DropdownMenuItem<AppLanguage>(
+          value: e,
+          child: Row(
+            children: [
+              Image.asset(asset),
+              const SizedBox(
+                width: 8.0,
+              ),
+              Text(
+                text,
+              ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 

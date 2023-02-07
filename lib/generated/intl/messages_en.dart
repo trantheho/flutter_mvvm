@@ -32,17 +32,23 @@ class MessageLookup extends MessageLookupByLibrary {
             "We provide best quality Fruits to your family"),
         "description3": MessageLookupByLibrary.simpleMessage(
             "Fast and responsibily delivery by our courir"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "language": MessageLookupByLibrary.simpleMessage("Languages"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "lorem": MessageLookupByLibrary.simpleMessage(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "nonEmail": MessageLookupByLibrary.simpleMessage("Email is empty"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "singIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "statistic": MessageLookupByLibrary.simpleMessage("Statistic"),
         "store": MessageLookupByLibrary.simpleMessage("Store"),
+        "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "welcome":
             MessageLookupByLibrary.simpleMessage("Welcome to Fresh Fruits")
       };

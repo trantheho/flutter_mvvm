@@ -32,18 +32,24 @@ class MessageLookup extends MessageLookupByLibrary {
             "Chúng tôi cung cấp Trái cây chất lượng tốt nhất cho gia đình bạn"),
         "description3": MessageLookupByLibrary.simpleMessage(
             "Giao hàng nhanh chóng và có trách nhiệm bằng nhân viên của chúng tôi"),
+        "english": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
+        "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "lorem": MessageLookupByLibrary.simpleMessage(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
         "nonEmail":
             MessageLookupByLibrary.simpleMessage("Email không được để trống"),
         "profile": MessageLookupByLibrary.simpleMessage("Cá nhân"),
+        "setting": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "singIn": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "statistic": MessageLookupByLibrary.simpleMessage("Thống kê"),
         "store": MessageLookupByLibrary.simpleMessage("Cửa hàng"),
+        "vietnamese": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "welcome": MessageLookupByLibrary.simpleMessage(
             "Chào mừng đến với Fresh Fruits")
       };
