@@ -40,14 +40,14 @@ class DialogController {
 
   /// confirm dialog
   void showConfirmDialog(
-      {required BuildContext context, String? title, String? message, Function? buttonOKCallback}) {
+      {required BuildContext context, String? title, String? message, Function? onOK}) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => ConfirmAlertDialog(
         title: title,
         message: message,
-        onOkPress: () => buttonOKCallback!(),
+        onOkPress: () => onOK!(),
       ),
     );
   }

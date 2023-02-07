@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/core/app_controller.dart';
 import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
 import 'package:flutter_mvvm/core/utils/app_enum.dart';
 import 'package:flutter_mvvm/core/utils/app_utils.dart';
@@ -61,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 iconAsset: AppImages.icLanguage,
                 text: S.of(context).language,
                 languages: AppLanguage.values,
-                onLanguageChanged: (languageContext, language){
+                onLanguageChanged: (languageContext, language) {
                   languageContext.appState.updateLocale(Locale(language.code));
                 },
               ),
@@ -105,7 +106,15 @@ class _ProfilePageState extends State<ProfilePage> {
               child: ProfileMenuItem(
                 iconAsset: AppImages.icLogout,
                 text: S.of(context).logout,
-                onTap: () {},
+                onTap: () {
+                  appController.dialog.showConfirmDialog(
+                    context: context,
+                    message: "Do you want to logout?",
+                    onOK: (){
+                      context.appState.signOut();
+                    }
+                  );
+                },
               ),
             ),
           ],
@@ -127,7 +136,9 @@ class ProfileInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userInfo = context.appState.currentUser!;
+    final userInfo = context.appState.currentUser;
+
+    if(userInfo == null) return const SizedBox.shrink();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
