@@ -20,7 +20,7 @@ class AuthRemoteDataSource{
     //final option = await dioClient.getOptions();
     //final response = await dioClient.dioCall(() => dioClient.dio.get(url, options: option));
     final Map<String, dynamic> json = {
-      "name": "test",
+      "name": "NowUSeeMe",
       "age": "20",
       "email": "test@gmail.com",
     };

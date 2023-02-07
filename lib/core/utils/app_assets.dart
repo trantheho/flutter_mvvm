@@ -27,6 +27,10 @@ class AppImages {
   static const icFilter = '$iconsPath/filter.png';
   static const icStar = '$iconsPath/star.png';
   static const icChecked = '$iconsPath/ic_check.png';
+  static const icDarkMode = '$iconsPath/dark_mode.png';
+  static const icSetting = '$iconsPath/setting.png';
+  static const icStatistic = '$iconsPath/statistic.png';
+  static const icLogout = '$iconsPath/logout.png';
 
 
   /// image
@@ -52,4 +56,5 @@ class AppImages {
   static const orangeFruit = '$imagesPath/orange_fruit.png';
   static const card = '$imagesPath/card.png';
   static const activeCard = '$imagesPath/active_card.png';
+  static const avatar = '$imagesPath/avatar.png';
 }
