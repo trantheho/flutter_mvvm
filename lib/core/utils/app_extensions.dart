@@ -7,6 +7,12 @@ extension BuildContextExtension on BuildContext{
   ThemeData get theme => Theme.of(this);
 
   AppState get appState => AppStateManager.of(this);
+
+  EdgeInsets get padding => MediaQuery.of(this).padding;
+
+  double get screenWidth => MediaQuery.of(this).size.width;
+
+  double get screenHeight => MediaQuery.of(this).size.height;
 }
 
 extension StringExtension on String {

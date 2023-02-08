@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/core/app_controller.dart';
+import 'package:flutter_mvvm/core/router/route_config.dart';
 import 'package:flutter_mvvm/core/utils/app_assets.dart';
 import 'package:flutter_mvvm/core/utils/app_helper.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
@@ -73,7 +74,7 @@ class _CheckoutPageState extends State<CheckoutPage> with SingleTickerProviderSt
                   PaymentMethod(
                     onConfirmOrder: (checkoutResult) {
                       if(checkoutResult){
-                        appController.toast.showToast(context: context, message: "Checkout is success");
+                        context.pushNamed(AppPage.checkoutResult.name);
                       }
                       else{
                         appController.toast.showToast(context: context, message: "Checkout was failed");

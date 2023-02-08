@@ -1,10 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm/core/app_controller.dart';
 import 'package:flutter_mvvm/core/router/route_config.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
 import 'package:flutter_mvvm/domain/models/category_model.dart';
-import 'package:flutter_mvvm/domain/models/product_model.dart';
 import 'package:flutter_mvvm/presentation/pages/deal/deal_page.dart';
 import 'package:flutter_mvvm/presentation/widgets/items/category_item.dart';
 import 'package:go_router/go_router.dart';
@@ -128,6 +126,6 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 
   void toDealPage(String type){
-    context.pushNamed(AppPage.deal.name, params: {AppPage.deal.params!: type.toLowerCase()});
+    context.goNamed(AppPage.deal.name, params: {AppPage.deal.params!: type.toLowerCase()});
   }
 }

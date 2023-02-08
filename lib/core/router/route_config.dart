@@ -3,6 +3,7 @@ import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_mvvm/domain/models/product_model.dart';
 import 'package:flutter_mvvm/presentation/pages/authenticate/auth_action_page/auth_action_page.dart';
 import 'package:flutter_mvvm/presentation/pages/categories/categories_page.dart';
+import 'package:flutter_mvvm/presentation/pages/checkout/result/checkout_result_page.dart';
 import 'package:flutter_mvvm/presentation/pages/deal/deal_page.dart';
 import 'package:flutter_mvvm/presentation/pages/deal/detail/item_detail_page.dart';
 import 'package:flutter_mvvm/presentation/pages/home/home_page.dart';
@@ -30,6 +31,7 @@ enum AppPage {
   category(path: '/category'),
   cart(path: '/cart'),
   checkout(path: 'checkout', fullPath: '/cart/checkout'),
+  checkoutResult(path: 'result', fullPath: '/cart/checkout/result'),
   favorite(path: '/favorite'),
   deal(path: ':type', fullPath: '/category/:type', params: 'type'),
   detail(path: ':product', params: 'product');
@@ -180,6 +182,21 @@ extension AppPageRoute on AppPage {
               child: const CheckoutPage(),
             );
           },
+          routes: [
+            AppPage.checkoutResult.route(),
+          ]
+        );
+      case AppPage.checkoutResult:
+        return GoRoute(
+            path: path,
+            name: name,
+            parentNavigatorKey: RouteConfig.rootKey,
+            pageBuilder: (_, state) {
+              return PageTransition.scale(
+                key: state.pageKey,
+                child: const CheckoutResultPage(),
+              );
+            },
         );
       default:
         return GoRoute(

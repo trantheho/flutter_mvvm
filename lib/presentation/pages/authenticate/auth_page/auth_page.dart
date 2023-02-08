@@ -20,7 +20,7 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: AppHelper.statusBarOverlayUI(Brightness.dark,),
+      value: appController.helper.statusBarOverlayUI(Brightness.dark,),
       child: Scaffold(
         body: SafeArea(
           child: Padding(

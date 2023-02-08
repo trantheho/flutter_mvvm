@@ -1,18 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/core/app_controller.dart';
-import 'package:flutter_mvvm/core/utils/app_helper.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
 import 'package:flutter_mvvm/domain/models/product_model.dart';
 import 'package:flutter_mvvm/presentation/providers/product_provider.dart';
 import 'package:flutter_mvvm/presentation/providers/shopping_cart_provider.dart';
-import 'package:flutter_mvvm/presentation/widgets/app_bar.dart';
 import 'package:flutter_mvvm/presentation/widgets/rating_overview.dart';
 import 'package:flutter_mvvm/presentation/widgets/tab_bar_view/description_tab.dart';
 import 'package:flutter_mvvm/presentation/widgets/tab_bar_view/review_tab.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/utils/app_utils.dart';
 import '../../../widgets/quantity_count.dart';
 
 class ItemDetailPage extends StatefulWidget {
@@ -31,7 +28,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: AppHelper.statusBarOverlayUI(Brightness.light),
+      value: appController.helper.statusBarOverlayUI(Brightness.light),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(

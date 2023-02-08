@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm/core/utils/app_assets.dart';
+import 'package:flutter_mvvm/core/router/route_config.dart';
+import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
+import 'package:flutter_mvvm/presentation/widgets/app_bar.dart';
 import 'package:flutter_mvvm/presentation/widgets/button.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../generated/l10n.dart';
 
@@ -11,8 +14,9 @@ class CheckoutResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 1.0,
+      backgroundColor: Colors.white,
+      appBar: MyAppBar(
+        backgroundColor: Colors.white,
         title: Text(
           'Thank You',
           style: AppTextStyle.medium.copyWith(
@@ -21,32 +25,34 @@ class CheckoutResultPage extends StatelessWidget {
         ),
         centerTitle: true,
         leading: IconButton(
-            onPressed: null,
-            icon: Image.asset(
-              AppImages.icRemove,
-              color: AppColors.orange,
-              width: 24,
-              height: 24,
-            )),
+          onPressed: () => context.go(AppPage.cart.path),
+          icon: Image.asset(
+            AppImages.icRemove,
+            color: AppColors.orange,
+            width: 24,
+            height: 24,
+          ),
+        ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: SizedBox(
-              width: double.infinity,
-              child: Image.asset(
-                AppImages.onBoardingTwoImg,
-                fit: BoxFit.fill,
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 28.0,
+          right: 28.0,
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: SizedBox(
+                width: double.infinity,
+                child: Image.asset(
+                  AppImages.onBoardingThree,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 28, right: 28),
+            Expanded(
               child: Column(
                 children: [
-                  const SizedBox(height: 34,),
                   Text(
                     'Your Order in process',
                     textAlign: TextAlign.center,
@@ -55,7 +61,9 @@ class CheckoutResultPage extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  const SizedBox(height: 34,),
+                  const SizedBox(
+                    height: 34,
+                  ),
                   Text(
                     S.of(context).lorem,
                     textAlign: TextAlign.center,
@@ -67,15 +75,18 @@ class CheckoutResultPage extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          AppButton(
-            buttonText: 'Track your order'.toUpperCase(),
-            style: AppTextStyle.medium.copyWith(
-              fontSize: 16,
+            AppButton(
+              buttonText: 'Track your order'.toUpperCase(),
+              style: AppTextStyle.medium.copyWith(
+                fontSize: 16,
+              ),
+              buttonColor: AppColors.lightYellow,
             ),
-            buttonColor: AppColors.lightYellow,
-          ),
-        ],
+            SizedBox(
+              height: context.padding.bottom + 50.0,
+            ),
+          ],
+        ),
       ),
     );
   }

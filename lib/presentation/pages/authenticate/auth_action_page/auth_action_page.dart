@@ -54,7 +54,7 @@ class _AuthActionPageState extends State<AuthActionPage> {
     return GestureDetector(
       onTap: () => appController.hideKeyboard(context),
       child: AnnotatedRegion(
-        value: AppHelper.statusBarOverlayUI(Brightness.light),
+        value: appController.helper.statusBarOverlayUI(Brightness.light),
         child: Scaffold(
           body: Consumer(
             builder: (_, ref, __) {

@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: AppHelper.statusBarOverlayUI(Brightness.dark),
+      value: appController.helper.statusBarOverlayUI(Brightness.dark),
       child: Scaffold(
         body: SafeArea(
           bottom: false,

@@ -3,25 +3,30 @@ import 'package:flutter/material.dart';
 import '../presentation/widgets/dialog.dart';
 import 'manager/loading_manager.dart';
 import 'router/app_router.dart';
+import 'utils/app_helper.dart';
 
 class AppController {
   final LoadingManager _loading;
   final AppRouter _router;
   final DialogController _dialog;
   final Toast _toast;
+  final AppHelper _helper;
 
   AppController()
       :
         _router = AppRouter(),
         _dialog = DialogController(),
         _loading = LoadingManager(),
-        _toast = Toast();
+        _toast = Toast(),
+        _helper = AppHelper();
 
   DialogController get dialog => _dialog;
 
   Toast get toast => _toast;
 
   LoadingManager get loading => _loading;
+
+  AppHelper get helper => _helper;
 
   AppRouter get router => _router;
 
