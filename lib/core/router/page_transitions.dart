@@ -78,4 +78,23 @@ class PageTransition extends CustomTransitionPage<void> {
     },
     child: child,
   );
+
+  PageTransition.sharedAxis({
+    LocalKey? key,
+    SharedAxisTransitionType? transitionType,
+    required Widget child,
+    Duration? duration,
+  }) : super(
+    key: key,
+    transitionDuration: duration ?? const Duration(milliseconds: 300),
+    transitionsBuilder: (_, animation, secondaryAnimation, child) {
+      return SharedAxisTransition(
+        animation: animation,
+        secondaryAnimation: secondaryAnimation,
+        transitionType: transitionType ?? SharedAxisTransitionType.horizontal,
+        child: child,
+      );
+    },
+    child: child,
+  );
 }

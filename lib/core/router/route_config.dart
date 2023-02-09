@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_mvvm/domain/models/product_model.dart';
@@ -116,8 +117,9 @@ extension AppPageRoute on AppPage {
             path: path,
             name: name,
             parentNavigatorKey: RouteConfig.rootKey,
-            pageBuilder: (context, state) => PageTransition.fadeThrough(
+            pageBuilder: (context, state) => PageTransition.sharedAxis(
                   key: state.pageKey,
+                  transitionType: SharedAxisTransitionType.scaled,
                   child: DealPage(
                     title: (state.params[params] ?? ''),
                   ),
@@ -165,8 +167,10 @@ extension AppPageRoute on AppPage {
           pageBuilder: (context, state) {
             final product = state.extra as ProductModel;
 
-            return PageTransition.fadeThrough(
+            return PageTransition.sharedAxis(
               key: state.pageKey,
+              transitionType: SharedAxisTransitionType.scaled,
+              duration: const Duration(milliseconds: 200),
               child: ItemDetailPage(product: product),
             );
           },
@@ -177,7 +181,7 @@ extension AppPageRoute on AppPage {
           name: name,
           parentNavigatorKey: RouteConfig.rootKey,
           pageBuilder: (_, state) {
-            return PageTransition.fadeThrough(
+            return PageTransition.sharedAxis(
               key: state.pageKey,
               child: const CheckoutPage(),
             );
