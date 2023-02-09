@@ -103,9 +103,14 @@ class ProfileMenuItem extends StatelessWidget {
 
     return DropdownButton<AppLanguage>(
       value: value,
-      icon: Icon(Icons.arrow_drop_down_outlined, color: theme.iconTheme.color,),
+      icon: Icon(
+        Icons.arrow_drop_down_outlined,
+        color: theme.iconTheme.color,
+      ),
       elevation: 16,
-      style: AppTextStyle.medium.copyWith(color: theme.primaryColorLight,),
+      style: AppTextStyle.medium.copyWith(
+        color: theme.primaryColorLight,
+      ),
       onChanged: (language) => onLanguageChanged != null ? onLanguageChanged!(context, language!) : null,
       items: languages.map((e) {
         String asset = '';
@@ -142,7 +147,18 @@ class ProfileMenuItem extends StatelessWidget {
   Widget _buildSwitchButton(BuildContext context, bool darkMode) {
     return Switch(
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      activeColor: AppColors.orange,
+      activeColor: Colors.white,
+      thumbIcon: MaterialStateProperty.resolveWith(
+        (states) {
+          if (states.contains(MaterialState.selected)) {
+            return const Icon(
+              Icons.check,
+              color: AppColors.orange,
+            );
+          }
+          return null;
+        },
+      ),
       activeTrackColor: Colors.orange,
       inactiveThumbColor: AppColors.greyLight,
       value: darkMode,

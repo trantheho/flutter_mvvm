@@ -3,6 +3,7 @@ import 'package:flutter_mvvm/core/utils/styles.dart';
 
 class ThemeManager {
   static final ThemeData light = ThemeData(
+    useMaterial3: true,
     primaryColor: AppColors.orange,
     backgroundColor: Colors.white,
     primaryColorLight: Colors.black,
@@ -27,6 +28,7 @@ class ThemeManager {
   );
 
   static final dark = ThemeData(
+    useMaterial3: true,
     primaryColor: Colors.white,
     backgroundColor: Colors.black54,
     primaryColorLight: Colors.orange,
