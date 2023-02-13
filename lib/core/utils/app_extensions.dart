@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+
+import '../router/route_config.dart';
 
 
 extension BuildContextExtension on BuildContext{
@@ -13,6 +16,8 @@ extension BuildContextExtension on BuildContext{
   double get screenWidth => MediaQuery.of(this).size.width;
 
   double get screenHeight => MediaQuery.of(this).size.height;
+
+  void popRoute() => GoRouter.of(this).location != AppPage.root.path ? canPop() : null;
 }
 
 extension StringExtension on String {

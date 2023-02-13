@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/core/app_controller.dart';
+import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
 import 'package:flutter_mvvm/domain/models/product_model.dart';
 import 'package:flutter_mvvm/presentation/providers/product_provider.dart';
@@ -81,7 +82,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
         child: Align(
           alignment: Alignment.topLeft,
           child: IconButton(
-            onPressed: () => appController.router.pop(),
+            onPressed: context.popRoute,
             icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,

@@ -3,10 +3,12 @@ import 'package:flutter_mvvm/core/app_controller.dart';
 import 'package:flutter_mvvm/core/router/route_config.dart';
 import 'package:flutter_mvvm/core/utils/app_assets.dart';
 import 'package:flutter_mvvm/core/utils/app_helper.dart';
+import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_mvvm/core/utils/styles.dart';
 import 'package:flutter_mvvm/generated/l10n.dart';
 import 'package:flutter_mvvm/presentation/widgets/button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key,}) : super(key: key);
@@ -79,7 +81,7 @@ class _AuthPageState extends State<AuthPage> {
                 fontSize: 16,
                 color: Colors.white,
               ),
-              onPressed: () => toRegister(ref),
+              onPressed: toRegister,
             );
           }
         ),
@@ -94,7 +96,7 @@ class _AuthPageState extends State<AuthPage> {
                   fontSize: 16,
                   color: Colors.black,
                 ),
-                onPressed: () => toLogin(ref),
+                onPressed: toLogin,
               );
             }
         ),
@@ -102,11 +104,11 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 
-  void toLogin(WidgetRef ref){
-    appController.router.of(context).goNamed(AppPage.authAction.name, params: {AppPage.authAction.params!: 'login'});
+  void toLogin(){
+    context.goNamed(AppPage.authAction.name, params: {AppPage.authAction.params!: 'login'});
   }
 
-  void toRegister(WidgetRef ref){
-    appController.router.of(context).goNamed(AppPage.authAction.name, params: {AppPage.authAction.params!: 'register'});
+  void toRegister(){
+    context.goNamed(AppPage.authAction.name, params: {AppPage.authAction.params!: 'register'});
   }
 }

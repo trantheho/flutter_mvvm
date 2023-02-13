@@ -163,7 +163,7 @@ class _AuthActionPageState extends State<AuthActionPage> {
         fullName: '$firstName $lastName',
         onSignIn: () {
           actionNotifier.value = AuthAction.login;
-          appController.router.of(context).goNamed(
+          context.goNamed(
             AppPage.authAction.name,
             params: {
               AppPage.authAction.params!: AuthAction.login.name,

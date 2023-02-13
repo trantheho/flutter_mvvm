@@ -236,7 +236,7 @@ class _DealPageState extends State<DealPage> with SingleTickerProviderStateMixin
             child: Padding(
               padding: const EdgeInsets.all(4.0).copyWith(left: 12),
               child: IconButton(
-                onPressed: () => appController.router.pop(),//Navigator.pop(context),
+                onPressed: context.popRoute,
                 icon: Icon(
                   Icons.arrow_back,
                   color: Color.lerp(Colors.white, Colors.black, t),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mvvm/core/manager/app_state_manager.dart';
 import 'package:flutter_mvvm/core/manager/theme_manager.dart';
+import 'package:flutter_mvvm/core/router/app_router.dart';
 import 'package:flutter_mvvm/core/utils/app_utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final router = AppRouter();
 
   @override
   void dispose() {
@@ -65,7 +67,7 @@ class _MyAppState extends State<MyApp> {
       ],
       locale: context.appState.locale,
       supportedLocales: S.delegate.supportedLocales,
-      routerConfig: appController.router.goRouter,
+      routerConfig: router.goRouter,
       themeMode: context.appState.themeMode,
       theme: ThemeManager.light,
       darkTheme: ThemeManager.dark,

@@ -35,8 +35,4 @@ class AppRouter{
             ),
           ],
         );
-
-  GoRouter of(BuildContext context) => GoRouter.of(context);
-
-  void pop() => _goRouter.location != AppPage.root.path ? _goRouter.pop() : null;
 }
