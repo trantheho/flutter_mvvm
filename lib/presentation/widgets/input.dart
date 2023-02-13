@@ -179,7 +179,7 @@ class AppInput extends StatefulWidget {
     TextStyle? style,
     TextStyle? hintStyle,
     this.autovalidateMode,
-    this.height = 39,
+    this.height,
   })  : inputDecoration = InputDecoration(
           hintText: hintText,
           hintStyle: hintStyle,
