@@ -21,10 +21,6 @@ class AppStateManager extends InheritedNotifier<AppState> {
     return context.dependOnInheritedWidgetOfExactType<AppStateManager>()!.notifier!;
   }
 
-  @override
-  bool updateShouldNotify(covariant InheritedNotifier<AppState> oldWidget) {
-    return super.updateShouldNotify(oldWidget);
-  }
 }
 
 class AppState extends ChangeNotifier {

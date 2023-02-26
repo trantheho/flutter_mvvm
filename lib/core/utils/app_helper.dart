@@ -6,6 +6,8 @@ DateTime? clickTime;
 
 class AppHelper {
 
+  void hideKeyboard(BuildContext context) => FocusScope.of(context).unfocus();
+
   /// set status bar style overlay ui
   SystemUiOverlayStyle statusBarOverlayUI(Brightness? androidBrightness) {
     late SystemUiOverlayStyle statusBarStyle;

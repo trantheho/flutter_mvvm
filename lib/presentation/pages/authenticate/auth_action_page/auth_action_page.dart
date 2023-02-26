@@ -52,7 +52,7 @@ class _AuthActionPageState extends State<AuthActionPage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => appController.hideKeyboard(context),
+      onTap: () => appController.helper.hideKeyboard(context),
       child: AnnotatedRegion(
         value: appController.helper.statusBarOverlayUI(Brightness.light),
         child: Scaffold(
@@ -134,7 +134,7 @@ class _AuthActionPageState extends State<AuthActionPage> {
           onRegisterPasswordChange: (value) => registerPassword = value,
           onClear: clearRegisterData,
           onCreateAnAccount: () {
-            appController.hideKeyboard(context);
+            appController.helper.hideKeyboard(context);
 
             final account = AccountModel(
               firstName: firstName,
@@ -149,7 +149,7 @@ class _AuthActionPageState extends State<AuthActionPage> {
       case AuthAction.login:
         return LoginLayout(
           onLogin: (){
-            appController.hideKeyboard(context);
+            appController.helper.hideKeyboard(context);
             authActionVM.login(email: email, password: password, context: context);
           },
         );

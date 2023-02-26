@@ -37,7 +37,7 @@ class _CheckoutPageState extends State<CheckoutPage> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => appController.hideKeyboard(context),
+      onTap: () => appController.helper.hideKeyboard(context),
       child: Scaffold(
         appBar: MyAppBar(
           backgroundColor: Colors.white,
